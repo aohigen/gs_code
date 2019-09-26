@@ -156,7 +156,7 @@ if($status==false) {
       <main class="main">
         <!-- Breadcrumb-->
         <ol class="breadcrumb">
-        <a href="data/data.csv">CSVダウンロード</a>
+        <a href="data/population.csv">CSVダウンロード</a>
         <!-- Breadcrumb Menu-->
           <li class="breadcrumb-menu d-md-down-none">
             <div class="btn-group" role="group" aria-label="Button group">
@@ -456,16 +456,19 @@ $('[name=dim]').change(function(){
     $('.selectAge').hide();
     $('.selectPref').show();
     $('.inputVal').hide();
+    $('.selectMTnumber').hide();
     break;
     case "age":
     $('.pullDownVal').show();
     $('.selectPref').hide();
     $('.selectAge').show();
     $('.inputVal').hide();
+    $('.selectMTnumber').hide();
     break;
     case "year":
     $('.pullDownVal').hide();
     $('.inputVal').show();
+    $('.selectMTnumber').show();
     break;
     default:
     $('.pullDownVal').show();
