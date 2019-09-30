@@ -1,9 +1,10 @@
 
-    <form action="index.php" method="get">
-        <span style="color:black">フィルタ：</span>
+    <form action="index.php" method="get" style="text-align:right">
+        <span style="color:black">アドバンスフィルタ：</span>
         <select id="filterDimension" name="dim" class="pullDown">
           <option value="null">未選択</option>
           <option value="prefecture">都道府県</option>
+          <option value="zone">地方</option>
           <option value="age">年齢</option>
           <option value="year">西暦</option>
         </select>
@@ -16,7 +17,7 @@
           <option value="宮城県" class="selectPref">宮城</option>
           <option value="福島県" class="selectPref">福島</option>
           <option value="茨城県" class="selectPref">茨城</option>
-          <option value="栃木"県 class="selectPref">栃木</option>
+          <option value="栃木県" class="selectPref">栃木</option>
           <option value="群馬県" class="selectPref">群馬</option>
           <option value="千葉県" class="selectPref">千葉</option>
           <option value="埼玉県" class="selectPref">埼玉</option>
@@ -55,23 +56,22 @@
           <option value="宮崎県" class="selectPref">宮崎</option>
           <option value="鹿児島県" class="selectPref">鹿児島</option>
           <option value="沖縄県" class="selectPref">沖縄</option>
-          <option value="総人口" class="selectAge">全年代</option>
-          <option value="0〜4歳" class="selectAge">0〜4歳</option>
-          <option value="5〜9歳" class="selectAge">5〜9歳</option>
-          <option value="10〜14歳" class="selectAge">10〜14歳</option>
-          <option value="15〜19歳" class="selectAge">15〜19歳</option>
-          <option value="20〜24歳" class="selectAge">20〜24歳</option>
-          <option value="25〜29歳" class="selectAge">25〜29歳</option>
-          <option value="30〜34歳" class="selectAge">30〜34歳</option>
-          <option value="35〜39歳" class="selectAge">35〜39歳</option>
-          <option value="40〜44歳" class="selectAge">40〜44歳</option>
-          <option value="45〜49歳" class="selectAge">45〜49歳</option>
-          <option value="50〜54歳" class="selectAge">50〜54歳</option>
-          <option value="55〜59歳" class="selectAge">55〜59歳</option>
-          <option value="60〜64歳" class="selectAge">60〜64歳</option>
-          <option value="65〜69歳" class="selectAge">65〜69歳</option>
-          <option value="70〜74歳" class="selectAge">70〜74歳</option>
-          <option value="75〜79歳" class="selectAge">75〜79歳</option>
+          <option value="北海道・東北" class="selectZone">北海道・東北</option>
+          <option value="関東" class="selectZone">関東</option>
+          <option value="中部" class="selectZone">中部</option>
+          <option value="関西" class="selectZone">関西</option>
+          <option value="中国・四国" class="selectZone">中国・四国</option>
+          <option value="九州・沖縄" class="selectZone">九州・沖縄</option>
+          <option value="総数" class="selectAge">全年代</option>
+          <option value="0〜5歳" class="selectAge">0~5歳</option>
+          <option value="6~15歳" class="selectAge">6~15歳</option>
+          <option value="15~20歳" class="selectAge">16~20歳</option>
+          <option value="20代" class="selectAge">20代</option>
+          <option value="30代" class="selectAge">30代</option>
+          <option value="40代" class="selectAge">40代</option>
+          <option value="50代" class="selectAge">50代</option>
+          <option value="60代" class="selectAge">60代</option>
+          <option value="70代" class="selectAge">70代</option>
           <option value="80歳以上" class="selectAge">80歳以上</option>
         </select>
       <input type="number" name="val2" class="inputVal" style="width:80px; display:none">
@@ -83,6 +83,9 @@
           <option value="<" class="selectMTnumber">より小さい</option>
           <option value="!=">等しくない</option>
         </select>
-      <input type="submit" value="絞り込む" id="filterBtn">
+        <br><br>
+        <div class="additionalRule"></div>
+        <div class="addFilter btn">＋条件を追加</div>
+      <input type="submit" value="アドバンスフィルタを適用" id="advanceFilterBtn">
     </form>
 

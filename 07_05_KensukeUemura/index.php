@@ -2,6 +2,8 @@
 //関数群を読み込む
 include("funcs.php");
 
+//ユーザー情報を取得
+$user_name = "kensuke";
 //セグメントルールの取得
 $filterDim = h($_GET["dim"]);
 if($_GET["val"]){
@@ -13,9 +15,21 @@ $filterMatchType = h($_GET["match"]);
 
 //DB接続関数の実行
 $pdo = db_conn();
-//SQLの各項目をコントロールしやすいように変数化
+
+//ユーザー情報の取得
+$sqlReqest = "SELECT * FROM user_table WHERE user_name='$user_name'";
+//DBからデータを取得（SQLを変数化して代入するのは自己流）
+$stmt = $pdo->prepare("$sqlReqest");
+$status = $stmt->execute();
+if($status==false) {
+  sql_error();
+}else{
+  $user_info = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+//分析データの取得
 $sqlSelect = "year,sum(population),sum(men_pop),sum(women_pop)";
-$sqlFrom = "population";
+$sqlFrom = "population2";
 if($filterDim == null || $filterVal == null){
   $sqlWhereDim = 'age';
   $sqlWhereVal = '"総数"';
@@ -24,13 +38,11 @@ if($filterDim == null || $filterVal == null){
   $sqlWhereVal = '"'.$filterVal.'"';
 }
 
-// EXIT($filterMatchType);
 if(!empty($filterMatchType)){
   $sqlWhere = $sqlWhereDim.$filterMatchType.$sqlWhereVal;
   }else{
   $sqlWhere = $sqlWhereDim."=".$sqlWhereVal;
   }
-
 
 $sqlGroupby = "year";
 $sqlReqest = "SELECT $sqlSelect FROM $sqlFrom WHERE $sqlWhere GROUP BY $sqlGroupby";
@@ -41,8 +53,7 @@ $status = $stmt->execute();
 //データを表示する
 if($status==false) {
   //execute（SQL実行時にエラーがある場合）
-  $error = $stmt->errorInfo();
-  exit("SQLエラー:".$error[2]);
+  sql_error();
 }else{
   //Selectデータの数だけ自動でループしてくれる（定番の書き方なので細かく知る必要なし）
   while( $r[] = $stmt->fetch(PDO::FETCH_ASSOC)){ 
@@ -50,9 +61,10 @@ if($status==false) {
   }
 }
 
+
 //SQLの各項目をコントロールしやすいように配列に
 //都道府県
-$stmt = $pdo->prepare("SELECT distinct(prefecture) FROM population");
+$stmt = $pdo->prepare("SELECT distinct(prefecture) FROM population2");
 $status = $stmt->execute();
 if($status==false) {
   $error = $stmt->errorInfo();
@@ -63,7 +75,7 @@ if($status==false) {
   }
 }
 //年齢
-$stmt = $pdo->prepare("SELECT distinct(age) FROM population");
+$stmt = $pdo->prepare("SELECT distinct(age) FROM population2");
 $status = $stmt->execute();
 if($status==false) {
   $error = $stmt->errorInfo();
@@ -87,86 +99,44 @@ if($status==false) {
     <title>JapanAnalytics</title>
     <!-- Icons-->
     <link href="css/style.css" rel="stylesheet">
-    <link href="vendors/pace-progress/css/pace.min.css" rel="stylesheet">
   </head>
+  <!-- ヘッダーを外部ファイル化 -->
+  <?php include("parts/header.php");?>
 
   <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
-    <header class="app-header navbar">
-      <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <a class="navbar-brand" href="#">JapanAnalytics</a>
-
-
-  
-      <button class="navbar-toggler aside-menu-toggler d-md-down-none" type="button" data-toggle="aside-menu-lg-show">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-    </header>
     <div class="app-body">
-      <div class="sidebar">
-        <nav class="sidebar-nav">
-          <ul class="nav">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">
-                <i class="nav-icon icon-speedometer"></i> ダッシュボード
-                <span class="badge badge-primary">NEW</span>
-              </a>
-            </li>
-            <li class="nav-title">分析</li>
-            <li class="nav-item">
-              <a class="nav-link" href="">
-                <i class="nav-icon icon-drop"></i> 人口データ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="">
-                <i class="nav-icon icon-pencil"></i> 健康データ</a>
-            </li>
-            <li class="nav-title">詳細データ</li>
-            <li class="nav-item nav-dropdown">
-              <a class="nav-link nav-dropdown-toggle" href="">
-                <i class="nav-icon icon-puzzle"></i> 犯罪率</a>
-            </li>
-            <li class="nav-item nav-dropdown">
-              <a class="nav-link nav-dropdown-toggle" href="">
-                <i class="nav-icon icon-cursor"></i> 国民総生産</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="">
-                <i class="nav-icon icon-pie-chart"></i> 就業度</a>
-            </li>
-            <li class="nav-item nav-dropdown">
-              <a class="nav-link nav-dropdown-toggle" href="">
-                <i class="nav-icon icon-star"></i> 税収</a>
-            </li>
-            <li class="nav-item mt-auto">
-              <a class="nav-link nav-link-success" href="" target="_top">
-                <i class="nav-icon icon-cloud-download"></i>お問合せ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link nav-link-danger" href="" target="_top">
-                <i class="nav-icon icon-layers"></i> ご紹介キャンペーン
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <button class="sidebar-minimizer brand-minimizer" type="button"></button>
-      </div>
+      <!-- サイドメニューを外部ファイル化 -->
+       <?php include("parts/sidemenu.php");?>
+
       <main class="main">
         <!-- Breadcrumb-->
         <ol class="breadcrumb">
-        <a href="data/population.csv">CSVダウンロード</a>
+        <a href="data/population2.csv">CSVダウンロード</a>　
         <!-- Breadcrumb Menu-->
           <li class="breadcrumb-menu d-md-down-none">
             <div class="btn-group" role="group" aria-label="Button group">
             <?php
+              if($user_info["plan"] !== 'free'){//無料プランの場合は表示しない
               //フィルターが長いので外部ファイル化
-              include("filter.html");
+              include("parts/filter.php");
+              }
             ?>
             </div>
           </li>
         </ol>
+      
+        <div class="card advanceFilter">
+            <div class="card-body">
+              <?php
+                include("parts/adv_filter.php");//アドバンスフィルタを外部ファイル化
+              ?>
+            </div>
+        </div>
+        
+
+
+
+
         <div class="container-fluid">
           <div class="animated fadeIn">
             <div class="row">
@@ -229,7 +199,7 @@ if($status==false) {
                 <div class="row">
                   <div class="col-sm-5">
                     <h4 class="card-title mb-0">人口の変化</h4>
-                    <div class="small text-muted reportTerm"></div>
+                    <div class="small text-muted reportTerm"></div><span class="activeFilter" style="font-size:80%"></span>
                   </div>
                   <!-- /.col-->
                   <div class="col-sm-7 d-none d-md-block">
@@ -249,7 +219,7 @@ if($status==false) {
                 </div>
                 <!-- /.row-->
                 <div class="chart-wrapper" style="height:auto;margin-top:10px;">
-                  <canvas id="popChart" class="chartSize"></canvas>
+                  <canvas id="popChart" class="chartSize" height="340"></canvas>
                 </div>
               </div>
               <div class="card-footer">
@@ -291,7 +261,11 @@ if($status==false) {
                   </div>
                 </div>
               </div>
-              <table></table>
+                <!-- <table style="margin:20px 20px 20px 20px">
+                <tr><th>西暦</th><th>総人口</th><th>男性</th><th>女性</th><th>女性率</th></tr>
+                <span class="dataList"></span>
+                </table> -->
+
             </div>
 
                       <!-- /.col-->
@@ -303,6 +277,16 @@ if($status==false) {
               <!-- /.col-->
             </div>
             <!-- /.row-->
+          
+
+                </div>
+              </div>
+            </div>
+
+
+
+
+
           </div>
         </div>
       </main>
@@ -352,7 +336,6 @@ for(i=0;i<db.length;i++){
     menGrowthRateArray.push(Number(db[i+1]["sum(men_pop)"]/db[i]["sum(men_pop)"]).toFixed(2));
     womenGrowthRateArray.push(Number(db[i+1]["sum(women_pop)"]/db[i]["sum(women_pop)"]).toFixed(2));
   }
-  console.log(popArray,growthRateArray,menGrowthRateArray,womenGrowthRateArray);
 }
 
 // 配列を元に主要指標を算出
@@ -453,14 +436,24 @@ $('[name=dim]').change(function(){
   switch($('#filterDimension').val()){
     case "prefecture":
     $('.pullDownVal').show();
+    $('.zone').hide();
     $('.selectAge').hide();
     $('.selectPref').show();
+    $('.inputVal').hide();
+    $('.selectMTnumber').hide();
+    break;
+    case "zone":
+    $('.pullDownVal').show();
+    $('.selectZone').show();
+    $('.selectAge').hide();
+    $('.selectPref').hide();
     $('.inputVal').hide();
     $('.selectMTnumber').hide();
     break;
     case "age":
     $('.pullDownVal').show();
     $('.selectPref').hide();
+    $('.selectZone').hide();
     $('.selectAge').show();
     $('.inputVal').hide();
     $('.selectMTnumber').hide();
@@ -496,6 +489,50 @@ $('#metrixNumber').on('click',function(){
   $('.metrixGrowthRate').removeClass('active');
 });
 
+//フィルタがかかっていたら文字列を挿入
+let filterRule = location.search||null;
+let filterDim = '<?=$filterDim?>';
+let filterMatchType = '<?=$filterMatchType?>';
+let filterVal = '<?=$filterVal?>';
+if(filterRule == null){
+  $('.activeFilter').hide();
+  filterRule = null;
+}else{
+  let v;
+  switch(filterDim){
+    case 'prefecture':
+      v = '都道府県';
+      break;
+    case 'zone':
+      v = '地方';
+      break;
+      case 'age':
+      v = '年齢';
+      break;
+    case 'year':
+      v = '西暦';
+      break;
+  }
+  $('.activeFilter').show();
+  $('.activeFilter').html('<p style="color:red">フィルターが有効：'+v+' '+filterMatchType+' '+filterVal+'　<a href="index.php" style="font-size:80%;color:blue">クリアする</a></p>');
+  filterRule = null;
+}
+
+$('.addFilter').on('click',function(){
+  $('.additionalRule').append('<select id="filterDimension" name="dim" class="pullDown"> <option value="null">未選択</option><option value="prefecture">都道府県</option><option value="zone">地方</option><option value="age">年齢</option><option value="year">西暦</option></select><select name="val" id="filterValue" class="pullDownVal"><option value="">条件を選んでください</option><option value="北海道" class="selectPref">北海道</option><option value="青森県" class="selectPref">青森</option><option value="岩手県" class="selectPref">岩手</option><option value="秋田県" class="selectPref">秋田</option><option value="宮城県" class="selectPref">宮城</option><option value="福島県" class="selectPref">福島</option><option value="茨城県" class="selectPref">茨城</option><option value="栃木県" class="selectPref">栃木</option><option value="群馬県" class="selectPref">群馬</option><option value="千葉県" class="selectPref">千葉</option><option value="埼玉県" class="selectPref">埼玉</option><option value="神奈川県" class="selectPref">神奈川</option><option value="東京都" class="selectPref">東京</option><option value="山梨県" class="selectPref">山梨</option><option value="静岡県" class="selectPref">静岡</option><option value="長野県" class="selectPref">長野</option><option value="新潟県" class="selectPref">新潟</option><option value="富山県" class="selectPref">富山</option><option value="石川県" class="selectPref">石川</option><option value="福井県" class="selectPref">福井</option><option value="岐阜県" class="selectPref">岐阜</option><option value="愛知県" class="selectPref">愛知</option><option value="三重県" class="selectPref">三重</option><option value="滋賀県" class="selectPref">滋賀</option><option value="京都府" class="selectPref">京都</option><option value="大阪府" class="selectPref">大阪</option><option value="兵庫県" class="selectPref">兵庫</option><option value="奈良県" class="selectPref">奈良</option><option value="和歌山県" class="selectPref">和歌山</option><option value="島根県" class="selectPref">島根</option><option value="鳥取県" class="selectPref">鳥取</option><option value="岡山県" class="selectPref">岡山</option><option value="広島県" class="selectPref">広島</option><option value="山口県" class="selectPref">山口</option><option value="徳島県" class="selectPref">徳島</option><option value="香川県" class="selectPref">香川</option><option value="高知県" class="selectPref">高知</option><option value="愛媛県" class="selectPref">愛媛</option><option value="福岡県" class="selectPref">福岡</option><option value="佐賀県" class="selectPref">佐賀</option><option value="長崎県" class="selectPref">長崎</option><option value="大分県" class="selectPref">大分</option><option value="熊本県" class="selectPref">熊本</option><option value="宮崎県" class="selectPref">宮崎</option><option value="鹿児島県" class="selectPref">鹿児島</option><option value="沖縄県" class="selectPref">沖縄</option><option value="北海道・東北" class="selectZone">北海道・東北</option><option value="関東" class="selectZone">関東</option><option value="中部" class="selectZone">中部</option><option value="関西" class="selectZone">関西</option><option value="中国・四国" class="selectZone">中国・四国</option><option value="九州・沖縄" class="selectZone">九州・沖縄</option><option value="総数" class="selectAge">全年代</option><option value="0〜5歳" class="selectAge">0~5歳</option><option value="6~15歳" class="selectAge">6~15歳</option><option value="15~20歳" class="selectAge">16~20歳</option><option value="20代" class="selectAge">20代</option><option value="30代" class="selectAge">30代</option><option value="40代" class="selectAge">40代</option><option value="50代" class="selectAge">50代</option><option value="60代" class="selectAge">60代</option><option value="70代" class="selectAge">70代</option><option value="80歳以上" class="selectAge">80歳以上</option></select><input type="number" name="val2" class="inputVal" style="width:80px; display:none"><select name="match" id="filterMatchType"><option value="=">等しい</option><option value=">=" class="selectMTnumber">以上</option><option value="<=" class="selectMTnumber">以下</option><option value=">" class="selectMTnumber">より大きい</option><option value="<" class="selectMTnumber">より小さい</option><option value="!=">等しくない</option></select><br><br>');
+});
+
+//アドバンスフィルター
+$('.advanceFilter').hide(); //デフォルトでは隠す
+$('.advanceFilterBtn').on('click',function(){
+  $('.advanceFilter').show();
+});
+
+//グラフの下に表を挿入
+for(i=0;i<yearArray.length;i++){
+  $('.dataList').append('<tr><td>'+yearArray[i]+'年</td><td>'+popArray[i].toLocaleString()+'</td><td>'+menPopArray[i].toLocaleString()+'</td><td>'+womenPopArray[i].toLocaleString()+'</td><td>'+(womenRateArray[i]*100).toFixed(1)+'%'+'</td></tr>');
+console.log("表ぐみ：",yearArray[i]);
+}
 
 </script>
 

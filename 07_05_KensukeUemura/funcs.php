@@ -1,5 +1,4 @@
 <?php
-
 //XSS対応（echoする場所で使用！それ以外はNG）
 //スクリプトがスクリプトが送信されたとしても無効化するように「&，<，>，”，’」を自動エスケープ処理
 function h($v){
@@ -16,7 +15,6 @@ function Ymd(){
 function His(){
     echo date("H:i:s");
 }
-
 //DB接続するための関数（プロジェクトごとに変更の必要あり）
 function db_conn(){
     //1.  DB接続します
