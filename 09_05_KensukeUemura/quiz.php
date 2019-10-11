@@ -4,6 +4,7 @@ include("funcs.php");
 login_check();
 $_SESSION["quiz_limit"] = 10; //クイズが終了する設問数
 
+
 //DB接続関数の実行
 $pdo = db_conn();
 //ユーザー情報の取得
@@ -17,7 +18,7 @@ if($status==false) {
   $user_info = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 //questionDBのレコード数を取得して、それを上限にランダム生成
-$stmt = $pdo->prepare("SELECT COUNT(q_id) FROM questions");
+$stmt = $pdo->prepare("SELECT COUNT(q_id) FROM questions_ohori");
 $status = $stmt->execute();
 if($status==false) {
   sql_error();
@@ -27,7 +28,7 @@ if($status==false) {
 $q_num = intval($value[0]);
 $q_id = rand(1,$q_num);
 //質問の情報をデータベースから取得
-$stmt = $pdo->prepare("SELECT * FROM questions WHERE q_id='$q_id'");
+$stmt = $pdo->prepare("SELECT * FROM questions_ohori WHERE q_id='$q_id'");
 $status = $stmt->execute();
 if($status==false) {
   sql_error();
@@ -42,6 +43,9 @@ $answer_json = json_encode($answer_array);
 
 //クイズの問題の回答数の変数
 $quiz_cnt = 0;
+if($_GET["cnt"] > 0){
+  $quiz_num= '：<span style="font-size:150%;color:#20a8d8">'.$_GET['cnt'].'</span>問目／'.$_SESSION['quiz_limit'].'問';
+}
 ?>
 
 <!DOCTYPE html>
@@ -52,9 +56,10 @@ $quiz_cnt = 0;
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>ソムリエ試験対策</title>
+    <title>OHORI MANIA! -クイズ</title>
     <!-- Icons-->
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/my_style.css" rel="stylesheet">
   </head>
   <!-- ヘッダーを外部ファイル化 -->
   <?php include("parts/header.php");?>
@@ -80,7 +85,7 @@ $quiz_cnt = 0;
             <div class="card">
               <div class="card-body">
                   <div class="col-sm-5">
-                    <h4 class="card-title mb-0">クイズ</h4>
+                    <h4 class="card-title mb-0">クイズ<?=$quiz_num?></h4>
                   </div>
                 </div>
                 <!-- /.row-->
@@ -91,18 +96,32 @@ $quiz_cnt = 0;
               <div class="alert"></div>
               <form method="POST" action="backend/quiz_act.php">
               <div class="input-group mb-3">
-                <div class="input-group-prepend" style="display:block;">
-                <input type="checkbox" name="quiz_select" id="select1" value="<?=$answer_array[0]?>"><label for="select1"><?=$answer_array[0]?></label>　
-                <input type="checkbox" name="quiz_select" id="select2" value="<?=$answer_array[1]?>"><label for="select2"><?=$answer_array[1]?></label>　
-                <input type="checkbox" name="quiz_select" id="select3" value="<?=$answer_array[2]?>"><label for="select3"><?=$answer_array[2]?></label>　
-                <input type="checkbox" name="quiz_select" id="select4" value="<?=$answer_array[3]?>"><label for="select4"><?=$answer_array[3]?></label>
+                <div class="input-group-prepend" style="width:100%">
+                <ul class="selectradio" style="width:100%">
+                  <li class="selectradio-item">
+                    <input type="radio" name="quiz_select" id="select1" value="<?=$answer_array[0]?>"><label for="select1" class="selectradio-label"><?=$answer_array[0]?></label>
+                  </li>
+                  <li class="selectradio-item">
+                    <input type="radio" name="quiz_select" id="select2" value="<?=$answer_array[1]?>"><label for="select2" class="selectradio-label"><?=$answer_array[1]?></label>
+                  </li>
+                  <li class="selectradio-item">
+                    <input type="radio" name="quiz_select" id="select3" value="<?=$answer_array[2]?>"><label for="select3" class="selectradio-label"><?=$answer_array[2]?></label>
+                  </li>
+                  <li class="selectradio-item">
+                    <input type="radio" name="quiz_select" id="select4" value="<?=$answer_array[3]?>"><label for="select4" class="selectradio-label"><?=$answer_array[3]?></label>
+                  </li>
+                </ul>
                 </div>
-              </div>
               <input type="hidden" name="q_id" value="<?=$q_id?>">
-              <button type="submit" class="btn btn-block btn-success">更新する</button>
+              
+              <button type="submit" class="btn btn-block btn-success" style="margin:50px">更新する</button>
               </form>
             </div>
           </div>
+          <div class="u-mb-20">
+
+
+</div>
                 </div>
               </div>
             </div>
@@ -117,17 +136,9 @@ $quiz_cnt = 0;
         </div>
       </main>
     </div>
-    <footer class="app-footer">
-      <div>
-        WineData
-        <span>&copy; 2019 クイズアプリ</span>
-      </div>
-      <div class="ml-auto">
-        <span>Powered by</span>
-        3rdPartyTrust
-      </div>
-    </footer>
-    <!-- CoreUI and necessary plugins-->
+    
+<?php include("parts/footer.php");?>
+
 
 
 <!-- ここよりJavaScript領域 -->
@@ -142,6 +153,8 @@ $quiz_cnt = 0;
     $(this).prop('checked',true);
   });
 </script>
+
+
 
   </body>
 </html>

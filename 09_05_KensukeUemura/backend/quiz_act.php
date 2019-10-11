@@ -23,7 +23,7 @@ if($status==false) {
 
 
 //質問の情報をデータベースから取得
-$stmt = $pdo->prepare("SELECT * FROM questions WHERE q_id='$q_id'");
+$stmt = $pdo->prepare("SELECT * FROM questions_ohori WHERE q_id='$q_id'");
 $status = $stmt->execute();
 if($status==false) {
   sql_error();
@@ -42,7 +42,6 @@ if($quiz_select == $question["crct_answer"]){
   $user_info['answer_times']++;
 }
 
-
 //回答DBに保存
 $stmt = $pdo->prepare("INSERT INTO answers(q_id,crct_flg,user_id,crct_amount,answer_amount,answer_time)VALUES(:q_id,:crct_flg,:id,:crct_amt,:answer_amt,sysdate())");
 $stmt->bindValue(':q_id', $q_id, PDO::PARAM_INT); 
@@ -51,7 +50,7 @@ $stmt->bindValue(':id', $user_info['user_id'], PDO::PARAM_INT);
 $stmt->bindValue(':crct_amt', $user_info['crct_times'], PDO::PARAM_INT);
 $stmt->bindValue(':answer_amt', $user_info['answer_times'], PDO::PARAM_INT);
 // EXIT($stmt);
-$status = $stmt->execute(); //実行552
+$status = $stmt->execute(); //実行
 
 //ユーザーDBを更新
 $stmt = $pdo->prepare("UPDATE user_table SET answer_times=:answer_times,crct_times=:crct_times WHERE user_id=:id");
@@ -61,10 +60,10 @@ $stmt->bindValue(':id', $user_info['user_id'], PDO::PARAM_INT);
 $status = $stmt->execute(); //実行
 
 if($_SESSION["quiz_cnt"]<=$_SESSION["quiz_limit"]){
-  redirect("../quiz.php?cnt=".$_SESSION["quiz_cnt"]);
+  redirect("../quiz.php?cnt=".$_SESSION["quiz_cnt"]."&qid=".$q_id."&crflg=".$crct_flg);
 }else{
   redirect("quiz_finish.php");
 }
-
-
 ?>
+
+

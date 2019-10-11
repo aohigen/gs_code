@@ -17,8 +17,6 @@ if($status==false) {
   $user_info = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-$_SESSION["quiz_cnt"]=0; //クイズの設問数をリセット
-$_SESSION["quiz_crct_cnt"]=0; //正答数もリセット
 $user_info['quiz_times']++;
 
 //ユーザーDBを更新
@@ -27,7 +25,7 @@ $stmt->bindValue(':quiz_times', $user_info['quiz_times'], PDO::PARAM_STR);
 $stmt->bindValue(':id', $user_info['user_id'], PDO::PARAM_INT);
 $status = $stmt->execute(); //実行
 
-redirect("../index.php");
+redirect("../quiz_result.php");
 
 
 ?>

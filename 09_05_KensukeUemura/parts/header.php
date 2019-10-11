@@ -2,7 +2,7 @@
     <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="#">ソムリエ試験対策</a>
+    <a class="navbar-brand" href="#">OHORI MANIA!</a>
   
 
 

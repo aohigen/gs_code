@@ -27,7 +27,7 @@ if($status==false) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>OHORI MANIA! -マイページ</title>
+    <title>OHORI MANIA! -クイズスタート</title>
     <!-- Icons-->
     <link href="css/style.css" rel="stylesheet">
     <link href="vendors/pace-progress/css/pace.min.css" rel="stylesheet">
@@ -56,65 +56,18 @@ if($status==false) {
             <div class="card">
               <div class="card-body">
                   <div class="col-sm-5">
-                    <h4 class="card-title mb-0">マイページ</h4>
+                    <h4 class="card-title mb-0">クイズ開始</h4>
                   </div>
                 </div>
                 <!-- /.row-->
                 <div class="chart-wrapper" style="height:auto;margin-top:10px;">
                 <div class="card mx-4">
             <div class="card-body p-4" style="width:60%">
-              <h1>情報は最新ですか？</h1>
-              <p class="text-muted">内容に変更があった場合、以下のフォームから変更することができます。</p>
-              <div class="alert"></div>
-              <form method="POST" action="backend/update.php">
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <i class="icon-user">ユーザー名（半角英数字）</i>
-                  </span>
-                </div>
-                <input class="form-control" type="text" value="<?=$user_info["user_name"]?>" name="user_name">
-              </div>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    現在のプラン
-                  </span>
-                </div>
-                <input class="form-control" type="text" value="<?=$user_info["plan"]?>">
-                
-                <select id="plan" name="plan" class="pullDown">
-                  <option value="null">プランを選んでください</option>
-                  <option value="free">無料プラン</option>
-                  <option value="silver">シルバープラン</option>
-                  <option value="gold">ゴールドプラン</option>
-              </select>
-              </div>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">メールアドレス</span>
-                </div>
-                <input class="form-control" type="text" value="<?=$user_info["email"]?>" name="email">
-              </div>
-              
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    パスワード
-                  </span>
-                </div>
-                <input class="form-control" type="password"  value="<?=$user_info["password"]?>" name="password">
-              </div>
-              <div class="input-group mb-4">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    パスワード（確認用）
-                  </span>
-                </div>
-                <input class="form-control" type="password" value="<?=$user_info["password"]?>" name="password2">
-              </div>
-              <button type="submit" class="btn btn-block btn-success">更新する</button>
-              </form>
+              <h1>地獄モード</h1>
+              <br>
+              <p class="text-muted">「地獄モード」は、自らギブアップするまで終わりません。</p>
+              <p class="text-muted">嫌いになるくらい、OHORIと向き合いましょう！</p>
+              <a href="quiz_jigoku.php" style="color:white"><button type="submit" class="btn btn-block btn-success">地獄モードへ旅立つ</button></a>
             </div>
           </div>
                 </div>

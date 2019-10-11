@@ -40,6 +40,17 @@ if($status==false) {
     $json_answers = json_encode($r);
   }
 }
+
+//カテゴリごとの回答を取得
+$stmt = $pdo->prepare("SELECT * FROM answers WHERE user_id='$user_id' ORDER BY answer_time ASC");
+$status = $stmt->execute();
+if($status==false) {
+  sql_error();
+}else{
+  while( $r[] = $stmt->fetch(PDO::FETCH_ASSOC)){ 
+    $json_answers = json_encode($r);
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +62,7 @@ if($status==false) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>JapanAnalytics</title>
+    <title>OHORI MANIA!</title>
     <!-- Icons-->
     <link href="css/style.css" rel="stylesheet">
   </head>
@@ -164,38 +175,31 @@ if($status==false) {
               <div class="card-footer">
                 <div class="row text-center">
                   <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                    <div class="text-muted">直近10問</div>
+                    <div class="text-muted">知ってて当たり前の大堀</div>
                     <strong><span class="10yNum"></span>   <br>(<span class="10yRate"></span>%)</strong>
                     <div class="progress progress-xs mt-2">
                       <div class="progress-bar bg-info 10yNumBar" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                   <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                    <div class="text-muted">直近20問</div>
+                    <div class="text-muted">大堀の歴史</div>
                     <strong><span class="20yNum"></span>  人 <br>(<span class="20yRate"></span>%)</strong>
                     <div class="progress progress-xs mt-2">
                       <div class="progress-bar bg-warning 20yNumBar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                   <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                    <div class="text-muted">直近50問</div>
+                    <div class="text-muted">知られざる大堀</div>
                     <strong><span class="50yNum"></span>  人 <br>(<span class="50yRate"></span>%)</strong>
                     <div class="progress progress-xs mt-2">
                       <div class="progress-bar bg-danger 50yNumBar" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                   <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                    <div class="text-muted">直近100問</div>
+                    <div class="text-muted">G'sでの大堀</div>
                     <strong><span class="75yNum"></span> 人 <br>(<span class="75yRate"></span>%)</strong>
                     <div class="progress progress-xs mt-2">
                       <div class="progress-bar bg-success 75yNumBar" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                  <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                    <div class="text-muted">初回調査比</div>
-                    <strong><span class="startNum"></span>  人 <br>(<span class="startRate"></span>%)</strong>
-                    <div class="progress progress-xs mt-2">
-                      <div class="progress-bar startNumBar" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                 </div>
@@ -217,25 +221,12 @@ if($status==false) {
               </div>
             </div>
 
-
-
-
-
           </div>
         </div>
       </main>
       
     </div>
-    <footer class="app-footer">
-      <div>
-        クイズだぴょん
-        <span>&copy; 2019 Quiz-Da-Pyon.</span>
-      </div>
-      <div class="ml-auto">
-        <span>Powered by</span>
-        3rdPartyTrust
-      </div>
-    </footer>
+    <?php include("parts/footer.php");?>
     <!-- CoreUI and necessary plugins-->
 
 
@@ -341,8 +332,7 @@ if(filterRule == null){
   $('.activeFilter').html('<p style="color:red">フィルターが有効：'+v+' '+filterMatchType+' '+filterVal+'　<a href="index.php" style="font-size:80%;color:blue">クリアする</a></p>');
   filterRule = null;
 }
-
 </script>
 
-  </body>
+</body>
 </html>

@@ -38,7 +38,7 @@ if($status==false) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>管理者画面 -ユーザー編集</title>
+    <title>OHORI MANIA! -管理者ページ（ユーザー編集）</title>
     <!-- Icons-->
     <link href="css/style.css" rel="stylesheet">
     <link href="vendors/pace-progress/css/pace.min.css" rel="stylesheet">

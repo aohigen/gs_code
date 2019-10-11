@@ -9,7 +9,7 @@ $sid = session_id();
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>ソムリエ試験アプリ -ログイン</title>
+    <title>OHORI MANIA! -ログイン</title>
 
     <!-- Main styles for this application-->
     <link href="css/style.css" rel="stylesheet">
@@ -25,6 +25,7 @@ $sid = session_id();
               <div class="card-body">
                 <h1>ログイン</h1>
                 <p class="text-muted">すでにご登録済みの方</p>
+                <div class="alert"></div>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" style="height:35px">
@@ -68,13 +69,18 @@ $sid = session_id();
         </div>
       </div>
     </div>
-    <!-- CoreUI and necessary plugins-->
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="node_modules/pace-progress/pace.min.js"></script>
-    <script src="node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
-    <script src="node_modules/@coreui/coreui/dist/js/coreui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="js/func.js"></script>
+    <script>
+      let st = getParam("st");
+      switch (st) {
+        case "lg_er":
+          $('.alert').html('<span style="color:red">ログインに失敗しました。</span>');
+          break;
+        default:
+          break;
+      }
+    </script>
   </body>
 </html>
 

@@ -2,6 +2,9 @@
 session_start();
 include("funcs.php");
 login_check();
+if($_POST["self_quiz_limit"]>0){
+  $_SESSION["quiz_limit"] = $_POST["self_quiz_limit"]; //クイズが終了する設問数
+}
 
 //DB接続関数の実行
 $pdo = db_conn();
@@ -42,7 +45,7 @@ $answer_json = json_encode($answer_array);
 //クイズの問題の回答数の変数
 $quiz_cnt = 0;
 if($_GET["cnt"] > 0){
-  $quiz_num= '：<span style="font-size:150%;color:#20a8d8">'.$_GET['cnt'].'</span>問目';
+  $quiz_num= '：<span style="font-size:150%;color:#20a8d8">'.$_GET['cnt'].'</span>問目／'.$_SESSION['quiz_limit'].'問';
 }
 ?>
 
@@ -92,7 +95,7 @@ if($_GET["cnt"] > 0){
             <div class="card-body p-4" style="width:100%">
               <h1><?=$question["question"]?></h1>
               <div class="alert"></div>
-              <form method="POST" action="backend/quiz_jigoku_act.php">
+              <form method="POST" action="backend/quiz_self_act.php">
               <div class="input-group mb-3">
                 <div class="input-group-prepend" style="width:100%">
                 <ul class="selectradio" style="width:100%">
@@ -113,10 +116,7 @@ if($_GET["cnt"] > 0){
               <input type="hidden" name="q_id" value="<?=$q_id?>">
               
               <button type="submit" class="btn btn-block btn-success" style="margin:50px">更新する</button>
-              <a href="quiz_result.php" style="color:black">ギブアップする</a>
               </form>
-              <br>
-              
             </div>
           </div>
           <div class="u-mb-20">

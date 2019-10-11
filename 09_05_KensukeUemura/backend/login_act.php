@@ -33,11 +33,19 @@ if(password_verify($_POST["password"],$val["password"])){
   $_SESSION["chk_ssid"]  = session_id();
   $_SESSION["admin_flg"] = $val['admin_flg'];
   $_SESSION["user_name"] = $val['user_name'];
+  $_SESSION["user_id"] = $val['user_id'];
   $_SESSION["plan"] = $val['plan'];
+  $login_cnt = $val['login_cnt'] + 1;
+  //ユーザーDBの累計ログイン数をアップデート
+  $stmt = $pdo->prepare("UPDATE user_table SET login_cnt=$login_cnt WHERE user_id=:id");
+  $stmt->bindValue(':id', $val['user_id'], PDO::PARAM_STR);
+  $status = $stmt->execute();
   redirect("../index.php?st=lg_sc");
 }else{
   //Login失敗時(Logout経由)
-  redirect("../login.php?st=er_ss");
+  redirect("../login.php?st=lg_er");
 }
+
+
 
 

@@ -11,7 +11,7 @@ $sid = session_id();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <title>会員情報を登録</title>
+    <title>OHORI MANIA! -会員登録</title>
 
     <!-- Main styles for this application-->
     <link href="css/style.css" rel="stylesheet">

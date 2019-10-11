@@ -61,7 +61,7 @@ $stmt->bindValue(':id', $user_info['user_id'], PDO::PARAM_INT);
 $status = $stmt->execute(); //実行
 
 if($_SESSION["quiz_cnt"]<=$_SESSION["quiz_limit"]){
-  redirect("../quiz_jigoku.php?cnt=".$_SESSION["quiz_cnt"]);
+  redirect("../quiz_self.php?cnt=".$_SESSION["quiz_cnt"]);
 }else{
   redirect("quiz_finish.php");
 }

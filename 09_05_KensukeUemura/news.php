@@ -27,7 +27,7 @@ if($status==false) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>OHORI MANIA! -マイページ</title>
+    <title>OHORI MANIA! -最新情報</title>
     <!-- Icons-->
     <link href="css/style.css" rel="stylesheet">
     <link href="vendors/pace-progress/css/pace.min.css" rel="stylesheet">
@@ -56,65 +56,67 @@ if($status==false) {
             <div class="card">
               <div class="card-body">
                   <div class="col-sm-5">
-                    <h4 class="card-title mb-0">マイページ</h4>
+                    <h4 class="card-title mb-0">ニュース</h4>
                   </div>
                 </div>
                 <!-- /.row-->
                 <div class="chart-wrapper" style="height:auto;margin-top:10px;">
                 <div class="card mx-4">
             <div class="card-body p-4" style="width:60%">
-              <h1>情報は最新ですか？</h1>
-              <p class="text-muted">内容に変更があった場合、以下のフォームから変更することができます。</p>
+              <h1>最新のアクティビティ</h1>
               <div class="alert"></div>
-              <form method="POST" action="backend/update.php">
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <i class="icon-user">ユーザー名（半角英数字）</i>
-                  </span>
-                </div>
-                <input class="form-control" type="text" value="<?=$user_info["user_name"]?>" name="user_name">
-              </div>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    現在のプラン
-                  </span>
-                </div>
-                <input class="form-control" type="text" value="<?=$user_info["plan"]?>">
-                
-                <select id="plan" name="plan" class="pullDown">
-                  <option value="null">プランを選んでください</option>
-                  <option value="free">無料プラン</option>
-                  <option value="silver">シルバープラン</option>
-                  <option value="gold">ゴールドプラン</option>
-              </select>
-              </div>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">メールアドレス</span>
-                </div>
-                <input class="form-control" type="text" value="<?=$user_info["email"]?>" name="email">
-              </div>
-              
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    パスワード
-                  </span>
-                </div>
-                <input class="form-control" type="password"  value="<?=$user_info["password"]?>" name="password">
-              </div>
-              <div class="input-group mb-4">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    パスワード（確認用）
-                  </span>
-                </div>
-                <input class="form-control" type="password" value="<?=$user_info["password"]?>" name="password2">
-              </div>
-              <button type="submit" class="btn btn-block btn-success">更新する</button>
-              </form>
+              <table class="table table-responsive-sm">
+                      <thead>
+                        <tr>
+                          <th>Username</th>
+                          <th>Date registered</th>
+                          <th>Role</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Samppa Nori</td>
+                          <td>2012/01/01</td>
+                          <td>Member</td>
+                          <td>
+                            <span class="badge badge-success">Active</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Estavan Lykos</td>
+                          <td>2012/02/01</td>
+                          <td>Staff</td>
+                          <td>
+                            <span class="badge badge-danger">Banned</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Chetan Mohamed</td>
+                          <td>2012/02/01</td>
+                          <td>Admin</td>
+                          <td>
+                            <span class="badge badge-secondary">Inactive</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Derick Maximinus</td>
+                          <td>2012/03/01</td>
+                          <td>Member</td>
+                          <td>
+                            <span class="badge badge-warning">Pending</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Friderik Dávid</td>
+                          <td>2012/01/21</td>
+                          <td>Staff</td>
+                          <td>
+                            <span class="badge badge-success">Active</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
             </div>
           </div>
                 </div>

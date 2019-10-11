@@ -3,6 +3,9 @@ session_start();
 include("funcs.php");
 login_check();
 
+//クイズのスコア変数
+$score_rate = round($_SESSION["quiz_crct_cnt"]/$_SESSION["quiz_cnt"]*100,2);
+
 //DB接続関数の実行
 $pdo = db_conn();
 //ユーザー情報の取得
@@ -15,24 +18,6 @@ if($status==false) {
 }else{
   $user_info = $stmt->fetch(PDO::FETCH_ASSOC);
 }
-
-//ユーザーの一覧を取得
-$sqlReqest = "SELECT * FROM user_table";
-//DBからデータを取得（SQLを変数化して代入するのは自己流）
-$stmt = $pdo->prepare("$sqlReqest");
-$status = $stmt->execute();
-if($status==false) {
-  sql_error();
-}else{
-  $view .= '<table><tr><th></th><th>ユーザー名</th><th>契約プラン</th><th>メールアドレス</th><th>登録日</th><th>ユーザー権限</th><th></th><th></th></tr>';
-  while( $r = $stmt->fetch(PDO::FETCH_ASSOC)){ 
-    $view .= '<tr height="50"><td width=50>';
-    $view .= $r["id"]."</td><td width=250>
-    ".$r["user_name"].'</td><td width=250>'.$r["plan"].'</td><td width=300>'.$r["email"].'</td><td width=150>'.$r["regist_date"].'</td><td width=150>'.$r["admin_flg"].'</td><td width="100"><a href="admin_user.php?id='.$r["user_id"].'" class="btn btn-success">編集</a></td><td width="100"><a class="btn btn-danger delete" href="backend/delete.php?id='.$r["user_id"].'">削除</a></td></tr>';
-  }
-  $view .= '</table>';
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -44,9 +29,10 @@ if($status==false) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>OHORI MANIA! -管理者ページ</title>
+    <title>OHORI MANIA! -クイズ結果</title>
     <!-- Icons-->
     <link href="css/style.css" rel="stylesheet">
+    <link href="vendors/pace-progress/css/pace.min.css" rel="stylesheet">
   </head>
   <!-- ヘッダーを外部ファイル化 -->
   <?php include("parts/header.php");?>
@@ -72,15 +58,19 @@ if($status==false) {
             <div class="card">
               <div class="card-body">
                   <div class="col-sm-5">
-                    <h4 class="card-title mb-0">ユーザー管理</h4>
+                    <h4 class="card-title mb-0">クイズ結果</h4>
                   </div>
                 </div>
                 <!-- /.row-->
                 <div class="chart-wrapper" style="height:auto;margin-top:10px;">
                 <div class="card mx-4">
-            <div class="card-body p-4">
-              <p class="text-muted">以下からユーザーの情報を任意に更新することができます。</p>
-              <?=$view?>
+            <div class="card-body p-4" style="width:60%">
+              <h1>あなたの成績は・・・？</h1>
+              <br>
+              <p>正答率　<span style="font-size:300%;color:#20a8d8"><?=$score_rate?></span> ％</p>
+              <p>あなたは合計<span style="font-size:150%;color:#63c2de"><?=$_SESSION["quiz_cnt"]-1?></span>問に回答し、<span style="font-size:150%;color:#63c2de"><?=$_SESSION["quiz_crct_cnt"]-1?></span>問正解をしました！</p>
+              <br>
+              <a href="index.php" style="color:white"><button type="submit" class="btn btn-block btn-success">TOPに戻る</button></a>
             </div>
           </div>
                 </div>
@@ -97,24 +87,31 @@ if($status==false) {
         </div>
       </main>
     </div>
-    <footer class="app-footer">
-      <div>
-        JapanData
-        <span>&copy; 2019 JapanAnalytics.</span>
-      </div>
-      <div class="ml-auto">
-        <span>Powered by</span>
-        3rdPartyTrust
-      </div>
-    </footer>
-    <!-- CoreUI and necessary plugins-->
-    
-<script>
-    
-</script>
+<?php include("parts/footer.php");?>
+
 
 <!-- ここよりJavaScript領域 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+<script src="js/func.js"></script>
+<script>
+  let er = getParam("er");
+      switch (er) {
+        case "pw":
+          $('.alert').html('<span style="color:red">パスワードが一致しません。</span>');
+          break;
+        case "id":
+          $('.alert').html('<span style="color:red">すでに登録されているユーザー名です。</span>');
+          break;
+        case "em":
+          $('.alert').html('<span style="color:red">すでに登録されているメールアドレスです。</span>');
+          break;
+        default:
+          break;
+      }
+</script>
+<?php
+$_SESSION["quiz_cnt"]=0; //クイズの設問数をリセット
+$_SESSION["quiz_crct_cnt"]=0; //正答数もリセット
+?>
   </body>
 </html>

@@ -27,7 +27,7 @@ if($status==false) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>OHORI MANIA! -マイページ</title>
+    <title>OHORI MANIA! -クイズ作成</title>
     <!-- Icons-->
     <link href="css/style.css" rel="stylesheet">
     <link href="vendors/pace-progress/css/pace.min.css" rel="stylesheet">
@@ -56,64 +56,73 @@ if($status==false) {
             <div class="card">
               <div class="card-body">
                   <div class="col-sm-5">
-                    <h4 class="card-title mb-0">マイページ</h4>
+                    <h4 class="card-title mb-0">クイズ作成</h4>
                   </div>
                 </div>
                 <!-- /.row-->
                 <div class="chart-wrapper" style="height:auto;margin-top:10px;">
                 <div class="card mx-4">
             <div class="card-body p-4" style="width:60%">
-              <h1>情報は最新ですか？</h1>
-              <p class="text-muted">内容に変更があった場合、以下のフォームから変更することができます。</p>
+              <h1>あなただけの <span style="color:#20a8d8">OHORI</span> を追加しよう！</h1>
+              <br>
+              <p class="text-muted">みんなの協力で、OHORI MANIA!はもっと魅力的に成長していきます。</p>
+              <p class="text-muted">とっておきのOHORIを追加しよう！</p>
               <div class="alert"></div>
-              <form method="POST" action="backend/update.php">
+              <form method="POST" action="backend/quiz_insert.php">
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
-                    <i class="icon-user">ユーザー名（半角英数字）</i>
+                    クイズのカテゴリ
                   </span>
                 </div>
-                <input class="form-control" type="text" value="<?=$user_info["user_name"]?>" name="user_name">
-              </div>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    現在のプラン
-                  </span>
-                </div>
-                <input class="form-control" type="text" value="<?=$user_info["plan"]?>">
-                
-                <select id="plan" name="plan" class="pullDown">
-                  <option value="null">プランを選んでください</option>
-                  <option value="free">無料プラン</option>
-                  <option value="silver">シルバープラン</option>
-                  <option value="gold">ゴールドプラン</option>
+                <select id="filterDimension" name="category_id" class="pullDown">
+                  <option>カテゴリを選んでください</option>
+                  <option value="1">知ってて当たり前の大堀</option>
+                  <option value="2">大堀の歴史</option>
+                  <option value="3">知られざる大堀</option>
+                  <option value="4">G'sでの大堀</option>
               </select>
               </div>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">メールアドレス</span>
-                </div>
-                <input class="form-control" type="text" value="<?=$user_info["email"]?>" name="email">
-              </div>
-              
+              <br>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
-                    パスワード
+                    <i class="icon-user">問題文</i>
                   </span>
                 </div>
-                <input class="form-control" type="password"  value="<?=$user_info["password"]?>" name="password">
+                <input class="form-control" type="text" placeholder="簡潔に入力してください" name="question">
               </div>
-              <div class="input-group mb-4">
+              <br>
+              <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
-                    パスワード（確認用）
+                    <i class="icon-user">正解の回答</i>
                   </span>
                 </div>
-                <input class="form-control" type="password" value="<?=$user_info["password"]?>" name="password2">
+                <input class="form-control" type="text" placeholder="問題文" name="crct_answer">
               </div>
-              <button type="submit" class="btn btn-block btn-success">更新する</button>
+              <br>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="icon-user">間違いの回答</i>
+                  </span>
+                </div>
+                <input class="form-control" type="text" placeholder="誤回答１" name="wrong_answer1">
+                <input class="form-control" type="text" placeholder="誤回答２" name="wrong_answer2">
+                <input class="form-control" type="text" placeholder="誤回答３" name="wrong_answer3">
+              </div>
+              <br>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="icon-user">解説文</i>
+                  </span>
+                </div>
+                <input class="form-control" type="text" placeholder="回答の後に表示される文章です。" name="discription">
+              </div>
+              <br><br>
+              <button type="submit" class="btn btn-block btn-success" type="button">新しい問題として登録</button>
               </form>
             </div>
           </div>
@@ -133,8 +142,8 @@ if($status==false) {
     </div>
     <footer class="app-footer">
       <div>
-        JapanData
-        <span>&copy; 2019 JapanAnalytics.</span>
+        OHORI MANIA!
+        <span>&copy; 2019 OHORI MANIA!.</span>
       </div>
       <div class="ml-auto">
         <span>Powered by</span>
@@ -148,16 +157,10 @@ if($status==false) {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="js/func.js"></script>
 <script>
-  let er = getParam("er");
-      switch (er) {
-        case "pw":
-          $('.alert').html('<span style="color:red">パスワードが一致しません。</span>');
-          break;
-        case "id":
-          $('.alert').html('<span style="color:red">すでに登録されているユーザー名です。</span>');
-          break;
-        case "em":
-          $('.alert').html('<span style="color:red">すでに登録されているメールアドレスです。</span>');
+  let st = getParam("st");
+      switch (st) {
+        case "qz_sc":
+          $('.alert').html('<span style="color:green">新しいクイズとして登録されました！</span>');
           break;
         default:
           break;
