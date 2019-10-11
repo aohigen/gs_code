@@ -41,16 +41,6 @@ if($status==false) {
   }
 }
 
-//カテゴリごとの回答を取得
-$stmt = $pdo->prepare("SELECT * FROM answers WHERE user_id='$user_id' ORDER BY answer_time ASC");
-$status = $stmt->execute();
-if($status==false) {
-  sql_error();
-}else{
-  while( $r[] = $stmt->fetch(PDO::FETCH_ASSOC)){ 
-    $json_answers = json_encode($r);
-  }
-}
 ?>
 
 <!DOCTYPE html>
