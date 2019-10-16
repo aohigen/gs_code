@@ -20,8 +20,8 @@ function db_conn(){
     //1.  DB接続します
     try {
       //Password:MAMP='root',XAMPP=''
-      // return new PDO('mysql:dbname=quiz_app;charset=utf8;host=localhost','root','root');
-      return new PDO('mysql:dbname=kensukeuemura_quiz_app;charset=utf8mb4;host=mysql739.db.sakura.ne.jp','kensukeuemura','mmp6mstm9z');
+      return new PDO('mysql:dbname=quiz_app;charset=utf8;host=localhost','root','root');
+      // return new PDO('mysql:dbname=kensukeuemura_quiz_app;charset=utf8;host=mysql739.db.sakura.ne.jp','kensukeuemura','mmp6mstm9z');
     } catch (PDOException $e) {
     exit('DB Connection Error:'.$e->getMessage()); //EXIT（プログラムを止める関数）でエラー警告
     }

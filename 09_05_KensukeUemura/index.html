@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>OHORI MANIA!</title>
+
+  <!-- jQuery -->
+<script src="js/jquery-2.1.3.min.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+  new WOW().init();
+</script>
+<!-- <link rel="stylesheet" href="css/reset.css"> -->
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <!-- ヘッダー領域 -->
+  <div id="header">
+      <div class="headerLeft">
+        <a href="index.html" class="headerLogo">
+        OHORI MANIA!
+        </a>
+      </div>
+      <div class="headerRight">
+        <a class="globalMenu" href="quiz/login.php">ログイン</a>
+        <a class="globalMenu" href="quiz/register.php">新規登録</a>
+      </div>
+  </div>
+  <!-- ヘッダー領域 ここまで-->
+
+  <!-- メイン領域 -->
+  <div id ="main">
+      <!-- メインビジュアル -->
+    <div class="mainVisual">
+      <div class="catchCopy">
+        <div class="catchSlide">
+          <div class="mainCatch">
+            もっと知ろう。<br>我らが担任、OHORIを。
+          </div>
+        </div>
+      <div class="topButton">
+          <a href="quiz/register.php" class="topButtonText">新規登録</a>
+      </div>
+      </div>
+    </div>
+    <!-- メインビジュアル ここまで-->
+  </div>
+  <!-- メイン領域 ここまで-->
+
+
+
+
+  <!-- フッター領域-->
+  <div id="footer">
+    <p>
+        copyrights 2020 OHORI MANIA! All RIghts Reserved.
+    </p>
+  </div>
+  <!-- フッター領域 ここまで-->
+
+
+
+<script>
+
+
+
+//////jQuery領域//////
+
+
+
+//////関数領域//////
+
+
+
+// じゃんけん履歴を集計
+let addChoicePath = (s,r) => {
+  times++;
+  localStorage.setItem('times',times);
+  if(lastChoice === s){ //前回と同じ手が続いているかをチェック
+    sameLast = true;
+    sameLastTimes++;
+    localStorage.setItem('sameLast',sameLast);
+    localStorage.setItem('sameLastTimes',sameLastTimes);
+  }else{ //同じ手でなければ、同じ手フラグをリセット
+    sameLastTimes = 0;
+    localStorage.setItem('sameLast',false);
+    localStorage.removeItem('sameLastTimes');
+  }
+  lastChoice = s; //今回の手を「前回の手」として保存
+  localStorage.setItem('lastChoice',lastChoice);
+  if(choicePath === null){ //最初の値がnullになってしまうので、回りくどいがif文で最初がnullにならないように調整
+    choicePath = s;
+    resultPath = r;
+  }else{ //履歴を追加
+    choicePath += ' > ' + s;
+    resultPath += ' > ' + r;
+  }
+  localStorage.setItem('choicePath',choicePath);
+  localStorage.setItem('resultPath',resultPath);
+  //配列でも履歴を保存。（配列と、連想配列）
+  choiceArray.push(s);
+  choiceCntArray[s]++;
+  resultArray.push(r);
+  //jsonに変換
+  localStorage.setItem('choiceArray',JSON.stringify(choiceArray));
+  localStorage.setItem('choiceCntArray',JSON.stringify(choiceCntArray));
+  localStorage.setItem('resultArray',JSON.stringify(resultArray));
+  localStorage.setItem('choicePath',choicePath);
+  localStorage.setItem('resultPath',resultPath);
+}
+
+
+// メインビジュアルの戦績を書き換える関数
+let updHistory = () =>{
+  $(".numWin").text(win);
+  $(".numDraw").text(draw);
+  $(".numLose").text(lose);
+  $(".numWinSS").text(winSS);
+  $(".numDrawSS").text(drawSS);
+  $(".numLoseSS").text(loseSS);
+}
+
+
+</script>
+
+</body>
+
+</html>
