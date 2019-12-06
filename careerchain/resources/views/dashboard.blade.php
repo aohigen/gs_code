@@ -5,20 +5,20 @@
       </div>
       <div class="content">
         <div class="row">
+        @foreach ($projects as $project)
           <div class="col-lg-4">
             <div class="card card-chart">
               <div class="card-header">
-                <h5 class="card-category">遠藤さんのワーク</h5>
-                <h4 class="card-title">金融A社 売上高4000万達成</h4>
+                <h5 class="card-category">{{$users[$project->created_user_id-1]->name}}さんのワーク</h5>
+                <h4 class="card-title">{{$project->project_name}}</h4>
                 <div class="dropdown">
                   <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
                     <i class="now-ui-icons loader_gear"></i>
                   </button>
                   <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <a class="dropdown-item text-danger" href="#">Remove Data</a>
+                    <a class="dropdown-item" href="#">編集</a>
+                    <a class="dropdown-item" href="#">Vote</a>
+                    <a class="dropdown-item text-danger" href="#">ブロック</a>
                   </div>
                 </div>
               </div>
@@ -34,53 +34,7 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="card card-chart">
-              <div class="card-header">
-                <h5 class="card-category">坂強さんの目標設定</h5>
-                <h4 class="card-title">TOIEC 900点達成</h4>
-                <div class="dropdown">
-                  <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
-                    <i class="now-ui-icons loader_gear"></i>
-                  </button>
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <a class="dropdown-item text-danger" href="#">Remove Data</a>
-                  </div>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart-area">
-                  <canvas id="lineChartExampleWithNumbersAndGrid"></canvas>
-                </div>
-              </div>
-              <div class="card-footer">
-                <div class="stats">
-                  <i class="now-ui-icons arrows-1_refresh-69"></i> 1日前
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="card card-chart">
-              <div class="card-header">
-                <h5 class="card-category">森本秀吉さんのワーク</h5>
-                <h4 class="card-title">Python機械学習開発</h4>
-              </div>
-              <div class="card-body">
-                <div class="chart-area">
-                  <canvas id="barChartSimpleGradientsNumbers"></canvas>
-                </div>
-              </div>
-              <div class="card-footer">
-                <div class="stats">
-                  <i class="now-ui-icons ui-2_time-alarm"></i> 3日前
-                </div>
-              </div>
-            </div>
-          </div>
+          @endforeach
         </div>
         <div class="row">
           <div class="col-md-6">

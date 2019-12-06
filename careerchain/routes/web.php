@@ -23,6 +23,8 @@ Route::get('/new_project', 'PagingController@new_project');
 
 Route::get('/user_list', 'PagingController@user_list');
 
+Route::get('/project_list', 'PagingController@project_list');
+
 Route::get('/timeline', 'PagingController@timeline');
 
 
@@ -32,10 +34,12 @@ Route::get('/timeline', 'PagingController@timeline');
 Route::post('/profile_resist', 'DatabaseController@profile_resist');
 //新規プロジェクトの登録
 Route::post('/new_project', 'DatabaseController@new_project');
+//follow
+Route::post('/follow', 'DatabaseController@follow');
 
 
 //認証系
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('dashboard');
+Route::get('/home', 'PagingController@dashboard');
 
 Route::get('/logout', 'Auth\LoginController@logout');
