@@ -6,6 +6,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
   <link rel="icon" type="image/png" href="img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <script src="js/core/jquery.min.js"></script>
   <title>
     CareerChain
   </title>
@@ -16,8 +17,6 @@
   <!-- CSS Files -->
   <link href="css/bootstrap.min.css" rel="stylesheet" />
   <link href="css/now-ui-dashboard.css?v=1.3.0" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="demo/demo.css" rel="stylesheet" />
 </head>
 
 <body class="">
@@ -27,7 +26,7 @@
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
       <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+        <a href="./" class="simple-text logo-normal">
         CareerChain
         </a>
       </div>
@@ -46,7 +45,7 @@
             </a>
           </li>
           <li>
-            <a href="./map.html">
+            <a href="./project_list">
               <i class="now-ui-icons location_map-big"></i>
               <p>プロジェクト</p>
             </a>
@@ -76,7 +75,7 @@
             </a>
           </li>
           <li class="active-pro">
-            <a href="./upgrade.html">
+            <a href="./profile_resist">
               <i class="now-ui-icons arrows-1_cloud-download-93"></i>
               <p>キャリアシート作成</p>
             </a>
@@ -193,7 +192,6 @@
 
 
   <!--   Core JS Files   -->
-  <script src="js/core/jquery.min.js"></script>
   <script src="js/core/popper.min.js"></script>
   <script src="js/core/bootstrap.min.js"></script>
   <script src="js/plugins/perfect-scrollbar.jquery.min.js"></script>
@@ -230,8 +228,6 @@
   <script src="js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="js/now-ui-dashboard.min.js?v=1.4.1" type="text/javascript"></script>
-  <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
-  <script src="demo/demo.js"></script>
 </body>
 
 </html>

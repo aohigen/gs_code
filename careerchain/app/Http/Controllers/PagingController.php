@@ -19,12 +19,13 @@ class PagingController extends Controller
     $this->middleware('auth');
     }
 
-    public function index() {
-        return view('welcome');
-    }
-
     public function dashboard() {
-        return view('dashboard');
+        $p_data = Project::all();
+        $u_data = User::select('id','name')->get();
+        return view('dashboard',[
+            'projects'=>$p_data,
+            'users'=>$u_data
+        ]);
     }
 
     //ユーザー情報系
@@ -44,8 +45,17 @@ class PagingController extends Controller
 
     //プロジェクト系
     public function timeline() {
-        $data = project::all();
+        $p_data = project::all();
+        $u_data = User::select('id','name')->get();
         return view('timeline',[
+            'projects'=>$p_data,
+            'users'=>$u_data
+        ]);
+    }
+
+    public function project_list() {
+        $data = project::all();
+        return view('project_list',[
             'projects'=>$data
         ]);
     }

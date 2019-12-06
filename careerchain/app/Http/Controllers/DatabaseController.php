@@ -98,6 +98,14 @@ class DatabaseController extends Controller
         return redirect('/?new_project_success');
     }
 
+    public function follow(Request $request){
+        // フォローの登録
+        $follows = new Follow;
+        $follows->user_id = $request->user_id;
+        $follows->followed_user_id = $request->followed_user_id; 
+        $follows->save();
+    }
+
 }
 
 

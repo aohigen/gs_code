@@ -66,9 +66,9 @@
                           <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm ">
                             <i class="now-ui-icons users_single-02"></i>
                           </button>
-                          <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm ">
-                            <i class="now-ui-icons gestures_tap-01"></i>
-                          </button>
+                            <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm follow_btn" value="{{$user->user_id}}">
+                                <i class="now-ui-icons gestures_tap-01"></i>
+                            </button>
                           <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm ">
                             <i class="now-ui-icons objects_diamond"></i>
                           </button>
@@ -83,4 +83,30 @@
           </div>
         </div>
       </div>
+
+<meta name="token" content="{{ csrf_token() }}">
+<script>
+    $(function(){
+        $('.follow_btn').click(function(){
+            let uid = $(this).val();
+            console.log(uid);
+            $.ajax({
+                headers: {
+                            'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
+                },
+                type:'POST', 
+                url:'./follow',
+                data: {'user_id': {{Auth::user()->id}},'followed_user_id': uid}
+            }).done(function (){
+                $('#follow').html("成功");//展開したいタグのidを指定
+            }).fail(function(){
+                alert('ファイルの取得に失敗しました。'+uid);
+            });
+        });
+    });
+
+    
+</script>
 @endsection
+
+

@@ -17,7 +17,7 @@
                     <label class="col-sm-2 col-form-label">ユーザー名</label>
                     <div class="col-sm-7">
                       <div class="form-group">
-                        <input class="form-control" type="text" name="nick_name" required="true" />
+                        <input class="form-control" type="text" value="{{Auth::user()->name}}" name="nick_name" required="true" />
                       </div>
                     </div>
                     <label class="col-sm-3 label-on-right">
