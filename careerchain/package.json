@@ -17,5 +17,13 @@
         "laravel-mix": "^1.0",
         "lodash": "^4.17.4",
         "vue": "^2.5.7"
+    },
+    "dependencies": {
+        "ethereum-input-data-decoder": "^0.3.0",
+        "express": "^4.17.1",
+        "laravel-echo": "^1.6.1",
+        "pusher-js": "^5.0.3",
+        "socket.io-client": "^2.3.0",
+        "web3": "^1.2.4"
     }
 }

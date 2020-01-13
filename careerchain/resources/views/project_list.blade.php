@@ -7,7 +7,7 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title">プロジェクト一覧</h4>
+                <h4 class="card-title">プロジェクト一覧</h4><a href="./new_project" class="btn btn-info">プロジェクトを作成する</a>
               </div>
               <div class="card-body">
                 <div class="toolbar">
@@ -20,7 +20,7 @@
                       <th>目標</th>
                       <th>期限</th>
                       <th>意気込み</th>
-                      <th class="disabled-sorting text-right">操作</th>
+                      <th class="disabled-sorting text-right"></th>
                     </tr>
                   </thead>
                   <!-- <tfoot>
@@ -35,14 +35,13 @@
                   <tbody>
                   @foreach ($projects as $project)
                     <tr>
-                      <td>{{$project->project_name}}</td>
+                      <td><a href="./project_detail?pid={{$project->id}}">{{$project->project_name}}</a></td>
                       <td>{{$project->project_goal}}</td>
                       <td>{{$project->limit_date}}</td>
                       <td>{{$project->before_comment}}</td>
                       <td class="text-right">
                         <a href="#" class="btn btn-round btn-info btn-icon btn-sm like"><i class="fas fa-heart"></i></a>
                         <a href="#" class="btn btn-round btn-warning btn-icon btn-sm edit"><i class="far fa-calendar-alt"></i></a>
-                        <a href="#" class="btn btn-round btn-danger btn-icon btn-sm remove"><i class="fas fa-times"></i></a>
                       </td>
                     </tr>
                     @endforeach
@@ -57,6 +56,14 @@
         </div>
         <!-- end row -->
       </div>
+    <script>
+      let status = <?$status?>;
+      if(status == 'project_success'){
+        demo.showSwal('success-message')
+      }
+      alert(status);
+      
+    </script>
 @endsection
 
 

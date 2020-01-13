@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
   <meta charset="utf-8" />
@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <script src="js/core/jquery.min.js"></script>
   <title>
-    CareerChain
+  {{ config('app.name', 'CareerChain') }}
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -27,7 +27,7 @@
     -->
       <div class="logo">
         <a href="./" class="simple-text logo-normal">
-        CareerChain
+        {{ config('app.name', 'CareerChain') }}
         </a>
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">
@@ -52,30 +52,102 @@
           </li>
           <li>
             <a href="./user_list">
-              <i class="now-ui-icons ui-1_bell-53"></i>
+              <i class="now-ui-icons users_single-02"></i>
               <p>仲間をさがす</p>
             </a>
           </li>
           <li>
-            <a href="./user.html">
-              <i class="now-ui-icons users_single-02"></i>
-              <p>支持者</p>
+            <a data-toggle="collapse" href="#market-manu">
+              <i class="now-ui-icons files_single-copy-04"></i>
+              <p>
+              キャリアマーケット
+                <b class="caret"></b>
+              </p>
             </a>
+            <div class="collapse " id="market-manu">
+              <ul class="nav">
+                <li>
+                  <a href="./market_list">
+                    <span class="sidebar-mini-icon">M</span>
+                    <span class="sidebar-normal">マーケット一覧</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <span class="sidebar-mini-icon">M
+                    </span>
+                    <span class="sidebar-normal">面談予約
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <span class="sidebar-mini-icon">MT
+                    </span>
+                    <span class="sidebar-normal">メンター
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <span class="sidebar-mini-icon">TS
+                    </span>
+                    <span class="sidebar-normal">タイムシェア</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <span class="sidebar-mini-icon">MV
+                    </span>
+                    <span class="sidebar-normal">移籍市場</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="./market_resist">
+                    <span class="sidebar-mini-icon">...</span>
+                    <span class="sidebar-normal">アイテム登録</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
           </li>
           <li>
-            <a href="./tables.html">
-              <i class="now-ui-icons design_bullet-list-67"></i>
-              <p>マーケット</p>
+            <a data-toggle="collapse" href="#mypage">
+              <i class="now-ui-icons files_single-copy-04"></i>
+              <p>
+              あなたのページ
+                <b class="caret"></b>
+              </p>
             </a>
-          </li>
-          <li>
-            <a href="./user?uid={{Auth::user()->id}}">
-              <i class="now-ui-icons text_caps-small"></i>
-              <p>プロフィール編集</p>
-            </a>
+            <div class="collapse " id="mypage">
+              <ul class="nav">
+                <li>
+                  <a href="./user?uid={{Auth::user()->id}}">
+                    <span class="sidebar-mini-icon">My</span>
+                    <span class="sidebar-normal">マイページ</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="./staker_list?sid={{Auth::user()->id}}">
+                    <span class="sidebar-mini-icon">M
+                    </span>
+                    <span class="sidebar-normal">ステークホルダー
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="./follower_list?fid={{Auth::user()->id}}">
+                    <span class="sidebar-mini-icon">MT
+                    </span>
+                    <span class="sidebar-normal">フォロワー
+                    </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
           </li>
           <li class="active-pro">
-            <a href="./profile_resist">
+            <a href="#">
               <i class="now-ui-icons arrows-1_cloud-download-93"></i>
               <p>キャリアシート作成</p>
             </a>
@@ -143,9 +215,9 @@
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">プロフィール</a>
-                  <a class="dropdown-item" href="#">フォロワー</a>
-                  <a class="dropdown-item" href="#">投票者</a>
+                  <a class="dropdown-item" href="./user?uid={{Auth::user()->id}}">マイページ</a>
+                  <a class="dropdown-item" href="./user_edit?uid={{Auth::user()->id}}">プロフィール編集</a>
+                  <a class="dropdown-item" href="#">最近のアクション</a>
                   <a class="dropdown-item" href="{{ url('logout') }}">ログアウト</a>
                 </div>
               </li>
@@ -160,8 +232,8 @@
           <nav>
             <ul>
               <li>
-                <a href="https://www.creative-tim.com">
-                  ダッシュボード
+                <a href="./user_edit_list">
+                  管理者画面
                 </a>
               </li>
               <li>
@@ -228,6 +300,15 @@
   <script src="js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="js/now-ui-dashboard.min.js?v=1.4.1" type="text/javascript"></script>
+  <script src="js/plugins/demo.js"></script>
+  <script>
+  $(document).ready(function() {
+      // SweetAlertのために必要
+      demo.showSwal();
+    });
+  </script>
+
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 </body>
 
 </html>

@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\User_project;
-use App\User_profile;
 use App\Project;
 use App\Follow;
+use App\Stake;
+use App\Cheer;
+use App\Market;
 use Validator;
 use Auth;
 
@@ -19,14 +20,14 @@ class DatabaseController extends Controller
     $this->middleware('auth');
     }
 
-    public function profile_resist(Request $request){
+    public function user_edit(Request $request){
         //バリデーション
         $validator = Validator::make($request->all(), [
-        'nick_name' => 'required|min:2|max:255',
+
         ]);     
         //バリデーション:エラー 
         if ($validator->fails()) {
-        return redirect('/?error')
+        return redirect('/user_edit?uid='.$request->id.'$st=val_error')
         ->withInput()
         ->withErrors($validator);
         }
@@ -51,62 +52,103 @@ class DatabaseController extends Controller
                 $main_img_filename = "";
             }
         // ユーザープロフィールを登録
-        $user_profiles = new User_profile;
-        $user_profiles->user_id = $request->user_id;
-        $user_profiles->nick_name = $request->nick_name; 
-        $user_profiles->first_name = $request->first_name; 
-        $user_profiles->last_name = $request->last_name; 
-        $user_profiles->catchcopy = $request->catchcopy; 
-        $user_profiles->profile_img = $profile_img_filename; 
-        $user_profiles->main_img = $main_img_filename; 
-        $user_profiles->birthday = $request->birthday; 
-        $user_profiles->website = $request->website; 
-        $user_profiles->birth_prefecture = $request->birth_prefecture; 
-        $user_profiles->nationality = $request->nationality; 
-        $user_profiles->work_company = $request->work_company; 
-        $user_profiles->work_industry = $request->work_industry; 
-        $user_profiles->work_position = $request->work_position; 
-        $user_profiles->final_education = $request->final_education; 
-        $user_profiles->skill_set = $request->skill_set; 
-        $user_profiles->challenge_skill = $request->challenge_skill; 
-        $user_profiles->free_comment = $request->free_comment; 
-        $user_profiles->save();
-        return redirect('/?profile_resist_success');
+        $users = User::find($request->id);
+        $users->first_name = $request->first_name; 
+        $users->last_name = $request->last_name; 
+        $users->catchcopy = $request->catchcopy; 
+        $users->profile_img = $profile_img_filename; 
+        $users->main_img = $main_img_filename; 
+        $users->birthday = $request->birthday; 
+        $users->website = $request->website; 
+        $users->birth_prefecture = $request->birth_prefecture; 
+        $users->nationality = $request->nationality; 
+        $users->work_company = $request->work_company; 
+        $users->work_industry = $request->work_industry; 
+        $users->work_position = $request->work_position; 
+        $users->final_education = $request->final_education; 
+        $users->skill_set = $request->skill_set; 
+        $users->challenge_skill = $request->challenge_skill; 
+        $users->free_comment = $request->free_comment; 
+        $users->save();
+        return redirect('/user?uid='.$request->id.'&st=edit_success');
     }
 
-    public function new_project(Request $request){
-        //バリデーション
-        $validator = Validator::make($request->all(), [
-        'project_name' => 'required|min:5|max:255',
-        ]);     
-        //バリデーション:エラー 
-        if ($validator->fails()) {
-        return redirect('/new_project?error')
-        ->withInput()
-        ->withErrors($validator);
-        }
-        // プロジェクト情報の登録
-        $projects = new Project;
-        $projects->created_user_id = $request->created_user_id;
-        $projects->project_name = $request->project_name; 
-        $projects->project_detail = $request->project_detail; 
-        $projects->project_goal = $request->project_goal; 
-        $projects->before_comment = $request->before_comment; 
-        $projects->limit_date = $request->limit_date; 
-        $projects->status = "start"; 
-        $projects->save();
-        return redirect('/?new_project_success');
-    }
 
+    //フォローの登録
     public function follow(Request $request){
-        // フォローの登録
         $follows = new Follow;
         $follows->user_id = $request->user_id;
         $follows->followed_user_id = $request->followed_user_id; 
+        $follows->unique_check = $request->user_id.'.'.$request->followed_user_id;
         $follows->save();
     }
 
+    //フォロー解除
+    public function unfollow(Request $request){
+        $unique_check = $request->user_id.'.'.$request->followed_user_id;
+        Follow::where('unique_check', $unique_check)->delete();
+    }
+
+    //ステークの登録
+    public function stake(Request $request){
+        $stakes = new Stake;
+        $stakes->user_id = $request->user_id;
+        $stakes->staked_user_id = $request->staked_user_id; 
+        $stakes->unique_check = $request->user_id.'.'.$request->staked_user_id;
+        $stakes->save();
+    }
+
+    //ステーク解除
+    public function unstake(Request $request){
+        $unique_check = $request->user_id.'.'.$request->staked_user_id;
+        Stake::where('unique_check', $unique_check)->delete();
+    }
+
+    //CheerUp
+    public function cheer_up(Request $request){
+        $stakes = new Cheer;
+        $stakes->project_id = $request->project_id;
+        $stakes->cheer_user_id = $request->cheer_user_id; 
+        $stakes->unique_check = $request->project_id.'.'.$request->cheer_user_id;
+        $stakes->save();
+    }
+
+    //CheerDown
+    public function cheer_down(Request $request){
+        $unique_check = $request->project_id.'.'.$request->cheer_user_id;
+        Cheer::where('unique_check', $unique_check)->delete();
+    }
+
+    public function market_resist(Request $request){
+        //バリデーション
+        $validator = Validator::make($request->all(), [
+            'item_type' => 'required|min:5|max:255',
+            'item_name' => 'required|min:5|max:255',
+            'price' => 'required',
+            'item_detail' => 'required|min:5|max:255'
+            ]);     
+            //バリデーション:エラー 
+            if ($validator->fails()) {
+            return redirect('/new_project?error')
+            ->withInput()
+            ->withErrors($validator);
+            }
+        // アイテムの登録
+        $markets = new Market;
+        $markets->user_id = $request->user_id;
+        $markets->item_type = $request->item_type;
+        $markets->item_name = $request->item_name; 
+        $markets->item_copy = $request->item_copy;
+        $markets->price = $request->price;
+        $markets->item_detail = $request->item_detail;
+        $markets->sell_scope = $request->sell_scope;
+        $markets->save();
+        return redirect('/?market_resistmf_success');
+    }
+
 }
+
+
 
 
 

@@ -57,6 +57,14 @@
                       </div>
                     </div>
                   </div>
+                  <div class="row">
+                    <label class="col-md-3 col-form-label">タグ</label>
+                    <div class="col-md-9">
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="tags">
+                      </div>
+                    </div>
+                  </div>
                 <div class="card-footer text-center">
                   <button type="submit" class="btn btn-primary">登録する</button>
                 </div>

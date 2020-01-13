@@ -1,222 +1,108 @@
 @extends('layouts.base')
 @section('content')
-<div class="panel-header panel-header-lg">
-        <canvas id="bigDashboardChart"></canvas>
-      </div>
-      <div class="content">
-        <div class="row">
-        @foreach ($projects as $project)
-          <div class="col-lg-4">
-            <div class="card card-chart">
-              <div class="card-header">
-                <h5 class="card-category">{{$users[$project->created_user_id-1]->name}}さんのワーク</h5>
-                <h4 class="card-title">{{$project->project_name}}</h4>
-                <div class="dropdown">
-                  <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
-                    <i class="now-ui-icons loader_gear"></i>
-                  </button>
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#">編集</a>
-                    <a class="dropdown-item" href="#">Vote</a>
-                    <a class="dropdown-item text-danger" href="#">ブロック</a>
+  <div class="panel-header panel-header-lg">
+    <canvas id="bigDashboardChart"></canvas>
+  </div>
+  
+  <div class="content">
+    <div class="row">
+    <div class="col-md-12">
+      <div class="card card-stats">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="statistics">
+                <div class="info">
+                  <div class="icon icon-primary">
+                    <i class="now-ui-icons ui-2_chat-round"></i>
                   </div>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart-area">
-                  <canvas id="lineChartExample"></canvas>
-                </div>
-              </div>
-              <div class="card-footer">
-                <div class="stats">
-                  <i class="now-ui-icons arrows-1_refresh-69"></i> 3分前
+                  <h3 class="info-title">{{$token}}<span>cc</span></h3>
+                  <h6 class="stats-title">トークン</h6>
                 </div>
               </div>
             </div>
-          </div>
-          @endforeach
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="card  card-tasks">
-              <div class="card-header ">
-                <h5 class="card-category">あなた</h5>
-                <h4 class="card-title">あなたのタスク</h4>
-              </div>
-              <div class="card-body ">
-                <div class="table-full-width table-responsive">
-                  <table class="table">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" checked>
-                              <span class="form-check-sign"></span>
-                            </label>
-                          </div>
-                        </td>
-                        <td class="text-left">１日３０分以上の英語勉強</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                            <i class="now-ui-icons ui-2_settings-90"></i>
-                          </button>
-                          <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                            <i class="now-ui-icons ui-1_simple-remove"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox">
-                              <span class="form-check-sign"></span>
-                            </label>
-                          </div>
-                        </td>
-                        <td class="text-left">GCPスペシャル資格の取得</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                            <i class="now-ui-icons ui-2_settings-90"></i>
-                          </button>
-                          <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                            <i class="now-ui-icons ui-1_simple-remove"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" checked>
-                              <span class="form-check-sign"></span>
-                            </label>
-                          </div>
-                        </td>
-                        <td class="text-left">新規口座にの３０件の獲得
-                        </td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                            <i class="now-ui-icons ui-2_settings-90"></i>
-                          </button>
-                          <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                            <i class="now-ui-icons ui-1_simple-remove"></i>
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="card-footer ">
-                <hr>
-                <div class="stats">
-                  <i class="now-ui-icons loader_refresh spin"></i> 30分前
+            <div class="col-md-3">
+              <div class="statistics">
+                <div class="info">
+                  <div class="icon icon-success">
+                    <i class="now-ui-icons business_money-coins"></i>
+                  </div>
+                  <h3 class="info-title">
+                    <small>$</small>{{$income}}</h3>
+                  <h6 class="stats-title">収益</h6>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card">
-              <div class="card-header">
-                <h5 class="card-category">あなたの支持者</h5>
-                <h4 class="card-title"> 最近のVobet獲得状況</h4>
+            <div class="col-md-3">
+              <div class="statistics">
+                <div class="info">
+                  <div class="icon icon-danger">
+                    <i class="now-ui-icons objects_diamond"></i>
+                  </div>
+                  <h3 class="info-title">{{$staked}}</h3>
+                  <h6 class="stats-title">ステークホルダー</h6>
+                </div>
               </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table">
-                    <thead class=" text-primary">
-                      <th>
-                        名前
-                      </th>
-                      <th>
-                        業界
-                      </th>
-                      <th>
-                        会社
-                      </th>
-                      <th class="text-right">
-                        Vobet
-                      </th>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          山下ゆかり
-                        </td>
-                        <td>
-                          製薬
-                        </td>
-                        <td>
-                          マーケティング
-                        </td>
-                        <td class="text-right">
-                          1
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Minerva Hooper
-                        </td>
-                        <td>
-                          Develop
-                        </td>
-                        <td>
-                          CEO
-                        </td>
-                        <td class="text-right">
-                          5
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          瀬古慎太郎
-                        </td>
-                        <td>
-                          デジタルマーケティング
-                        </td>
-                        <td>
-                          人事
-                        </td>
-                        <td class="text-right">
-                          2
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          織田陽太
-                        </td>
-                        <td>
-                          製造業
-                        </td>
-                        <td>
-                          IR
-                        </td>
-                        <td class="text-right">
-                          1
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          近藤勲
-                        </td>
-                        <td>
-                          個人
-                        </td>
-                        <td>
-                          -
-                        </td>
-                        <td class="text-right">
-                          1
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+            </div>
+            <div class="col-md-3">
+              <div class="statistics">
+                <div class="info">
+                  <div class="icon icon-info">
+                    <i class="now-ui-icons users_single-02"></i>
+                  </div>
+                  <h3 class="info-title">{{$followed}}</h3>
+                  <h6 class="stats-title">フォロワー</h6>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    @foreach ($projects as $project)
+      <div class="col-lg-4">
+        <div class="card card-chart">
+          <div class="card-header">
+            <h5 class="card-category"><span class="text-primary">{{DB::table('users')->where('id',$project->created_user_id)->value('name')}}</span>さんのワーク</h5>
+            <h4 class="card-title">{{$project->project_name}}</h4>
+            <div class="dropdown">
+              <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
+                <i class="now-ui-icons loader_gear"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="#">注目！</a>
+                <a class="dropdown-item" href="#">応援する</a>
+                <a class="dropdown-item text-danger" href="#">非表示にする</a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-area">
+              @if(DB::table('users')->where('id',$project->created_user_id)->value('main_img')==null)
+            <img src="img/image_placeholder.jpg" style="width:100%;height:220px">
+            @else
+            <img src="upload/main/{{DB::table('users')->where('id',$project->created_user_id)->value('main_img')}}" style="width:100%;height:220px">
+            @endif
+            </div>
+
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="now-ui-icons tech_watch-time"></i> {{$project->created_at}}
+            </div>
+          </div>
+        </div>
+      </div>
+      @endforeach
+    </div>
+  </div>
+<script>
+  $(document).ready(function() {
+    // Javascript method's body can be found in assets/js/demos.js
+    demo.initDashboardPageCharts();
+
+    demo.initVectorMap();
+
+  });
+</script>
 @endsection

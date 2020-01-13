@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserProject extends Migration
+class StakesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateUserProject extends Migration
      */
     public function up()
     {
-        Schema::create('user_projects', function (Blueprint $table) {
+        Schema::create('stakes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('project_id');
-            $table->string('user_id');
+            $table->integer('user_id');
+            $table->integer('staked_user_id');
+            $table->string('unique_check')->unique();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateUserProject extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_projects');
+        //
     }
 }

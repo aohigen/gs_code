@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFollowTable extends Migration
+class PurchasesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateFollowTable extends Migration
      */
     public function up()
     {
-        Schema::create('follows', function (Blueprint $table) {
+        Schema::create('purchases', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user_id');
-            $table->string('followed_user_id');
+            $table->integer('user_id');
+            $table->integer('seller_id');
+            $table->integer('item_id');
+            $table->integer('purchase_price');
+            $table->string('bc_trans_id');
+            $table->string('staker_trans');
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ class CreateFollowTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('follows');
+        //
     }
 }

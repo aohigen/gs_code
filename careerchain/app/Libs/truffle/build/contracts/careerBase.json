@@ -1,0 +1,645 @@
+{
+  "contractName": "careerBase",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "careerMemory",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0xa1ce3396"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_str",
+          "type": "string"
+        }
+      ],
+      "name": "setCareer",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0xbf7b87e3"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getCareer",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0xa4fc68b8"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b506104ec806100206000396000f3fe608060405260043610610057576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063a1ce33961461005c578063a4fc68b8146100ec578063bf7b87e31461017c575b600080fd5b34801561006857600080fd5b506100716102bd565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100b1578082015181840152602081019050610096565b50505050905090810190601f1680156100de5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b3480156100f857600080fd5b5061010161035b565b6040518080602001828103825283818151815260200191508051906020019080838360005b83811015610141578082015181840152602081019050610126565b50505050905090810190601f16801561016e5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b34801561018857600080fd5b506102426004803603602081101561019f57600080fd5b81019080803590602001906401000000008111156101bc57600080fd5b8201836020820111156101ce57600080fd5b803590602001918460018302840111640100000000831117156101f057600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f8201169050808301925050505050505091929192905050506103fd565b6040518080602001828103825283818151815260200191508051906020019080838360005b83811015610282578082015181840152602081019050610267565b50505050905090810190601f1680156102af5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b60008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156103535780601f1061032857610100808354040283529160200191610353565b820191906000526020600020905b81548152906001019060200180831161033657829003601f168201915b505050505081565b606060008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156103f35780601f106103c8576101008083540402835291602001916103f3565b820191906000526020600020905b8154815290600101906020018083116103d657829003601f168201915b5050505050905090565b6060816000908051906020019061041592919061041b565b50919050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061045c57805160ff191683800117855561048a565b8280016001018555821561048a579182015b8281111561048957825182559160200191906001019061046e565b5b509050610497919061049b565b5090565b6104bd91905b808211156104b95760008160009055506001016104a1565b5090565b9056fea165627a7a72305820830bef6d100b24f0fb9ce229a199fce96ea4a0be732947bc562d1b8bf26a7abc0029",
+  "deployedBytecode": "0x608060405260043610610057576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063a1ce33961461005c578063a4fc68b8146100ec578063bf7b87e31461017c575b600080fd5b34801561006857600080fd5b506100716102bd565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100b1578082015181840152602081019050610096565b50505050905090810190601f1680156100de5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b3480156100f857600080fd5b5061010161035b565b6040518080602001828103825283818151815260200191508051906020019080838360005b83811015610141578082015181840152602081019050610126565b50505050905090810190601f16801561016e5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b34801561018857600080fd5b506102426004803603602081101561019f57600080fd5b81019080803590602001906401000000008111156101bc57600080fd5b8201836020820111156101ce57600080fd5b803590602001918460018302840111640100000000831117156101f057600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f8201169050808301925050505050505091929192905050506103fd565b6040518080602001828103825283818151815260200191508051906020019080838360005b83811015610282578082015181840152602081019050610267565b50505050905090810190601f1680156102af5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b60008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156103535780601f1061032857610100808354040283529160200191610353565b820191906000526020600020905b81548152906001019060200180831161033657829003601f168201915b505050505081565b606060008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156103f35780601f106103c8576101008083540402835291602001916103f3565b820191906000526020600020905b8154815290600101906020018083116103d657829003601f168201915b5050505050905090565b6060816000908051906020019061041592919061041b565b50919050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061045c57805160ff191683800117855561048a565b8280016001018555821561048a579182015b8281111561048957825182559160200191906001019061046e565b5b509050610497919061049b565b5090565b6104bd91905b808211156104b95760008160009055506001016104a1565b5090565b9056fea165627a7a72305820830bef6d100b24f0fb9ce229a199fce96ea4a0be732947bc562d1b8bf26a7abc0029",
+  "sourceMap": "34:266:2:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;34:266:2;;;;;;;",
+  "deployedSourceMap": "34:266:2:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;60:26;;8:9:-1;5:2;;;30:1;27;20:12;5:2;60:26:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;60:26:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;205:93;;8:9:-1;5:2;;;30:1;27;20:12;5:2;205:93:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;205:93:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;93:106;;8:9:-1;5:2;;;30:1;27;20:12;5:2;93:106:2;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;93:106:2;;;;;;;;;;21:11:-1;8;5:28;2:2;;;46:1;43;36:12;2:2;93:106:2;;35:9:-1;28:4;12:14;8:25;5:40;2:2;;;58:1;55;48:12;2:2;93:106:2;;;;;;100:9:-1;95:1;81:12;77:20;67:8;63:35;60:50;39:11;25:12;22:29;11:107;8:2;;;131:1;128;121:12;8:2;93:106:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;30:3:-1;22:6;14;1:33;99:1;93:3;85:6;81:16;74:27;137:4;133:9;126:4;121:3;117:14;113:30;106:37;;169:3;161:6;157:16;147:26;;93:106:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;93:106:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;60:26;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;205:93::-;247:13;279:12;272:19;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;205:93;:::o;93:106::-;147:13;187:4;172:12;:19;;;;;;;;;;;;:::i;:::-;;93:106;;;:::o;34:266::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity >=0.4.25 <0.6.0;\n\ncontract careerBase {\n    string public careerMemory;\n\n    function setCareer(string memory _str) public returns(string memory) {\n        careerMemory = _str;\n\n    }\n\n    function getCareer() public view returns (string memory) {\n        return careerMemory;\n    }\n}",
+  "sourcePath": "/Applications/MAMP/htdocs/laravel/careerchain/app/Libs/truffle/contracts/career_memory.sol",
+  "ast": {
+    "absolutePath": "/Applications/MAMP/htdocs/laravel/careerchain/app/Libs/truffle/contracts/career_memory.sol",
+    "exportedSymbols": {
+      "careerBase": [
+        114
+      ]
+    },
+    "id": 115,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 91,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".25",
+          "<",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:2"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 114,
+        "linearizedBaseContracts": [
+          114
+        ],
+        "name": "careerBase",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 93,
+            "name": "careerMemory",
+            "nodeType": "VariableDeclaration",
+            "scope": 114,
+            "src": "60:26:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_string_storage",
+              "typeString": "string"
+            },
+            "typeName": {
+              "id": 92,
+              "name": "string",
+              "nodeType": "ElementaryTypeName",
+              "src": "60:6:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_string_storage_ptr",
+                "typeString": "string"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 104,
+              "nodeType": "Block",
+              "src": "162:37:2",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 102,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 100,
+                      "name": "careerMemory",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 93,
+                      "src": "172:12:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_storage",
+                        "typeString": "string storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 101,
+                      "name": "_str",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 95,
+                      "src": "187:4:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    },
+                    "src": "172:19:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage",
+                      "typeString": "string storage ref"
+                    }
+                  },
+                  "id": 103,
+                  "nodeType": "ExpressionStatement",
+                  "src": "172:19:2"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 105,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setCareer",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 96,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 95,
+                  "name": "_str",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 105,
+                  "src": "112:18:2",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 94,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "112:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "111:20:2"
+            },
+            "returnParameters": {
+              "id": 99,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 98,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 105,
+                  "src": "147:13:2",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 97,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "147:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "146:15:2"
+            },
+            "scope": 114,
+            "src": "93:106:2",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 112,
+              "nodeType": "Block",
+              "src": "262:36:2",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 110,
+                    "name": "careerMemory",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 93,
+                    "src": "279:12:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage",
+                      "typeString": "string storage ref"
+                    }
+                  },
+                  "functionReturnParameters": 109,
+                  "id": 111,
+                  "nodeType": "Return",
+                  "src": "272:19:2"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 113,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getCareer",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 106,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "223:2:2"
+            },
+            "returnParameters": {
+              "id": 109,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 108,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 113,
+                  "src": "247:13:2",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 107,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "247:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "246:15:2"
+            },
+            "scope": 114,
+            "src": "205:93:2",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 115,
+        "src": "34:266:2"
+      }
+    ],
+    "src": "0:300:2"
+  },
+  "legacyAST": {
+    "absolutePath": "/Applications/MAMP/htdocs/laravel/careerchain/app/Libs/truffle/contracts/career_memory.sol",
+    "exportedSymbols": {
+      "careerBase": [
+        114
+      ]
+    },
+    "id": 115,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 91,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".25",
+          "<",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:2"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 114,
+        "linearizedBaseContracts": [
+          114
+        ],
+        "name": "careerBase",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 93,
+            "name": "careerMemory",
+            "nodeType": "VariableDeclaration",
+            "scope": 114,
+            "src": "60:26:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_string_storage",
+              "typeString": "string"
+            },
+            "typeName": {
+              "id": 92,
+              "name": "string",
+              "nodeType": "ElementaryTypeName",
+              "src": "60:6:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_string_storage_ptr",
+                "typeString": "string"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 104,
+              "nodeType": "Block",
+              "src": "162:37:2",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 102,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 100,
+                      "name": "careerMemory",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 93,
+                      "src": "172:12:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_storage",
+                        "typeString": "string storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 101,
+                      "name": "_str",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 95,
+                      "src": "187:4:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    },
+                    "src": "172:19:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage",
+                      "typeString": "string storage ref"
+                    }
+                  },
+                  "id": 103,
+                  "nodeType": "ExpressionStatement",
+                  "src": "172:19:2"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 105,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setCareer",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 96,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 95,
+                  "name": "_str",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 105,
+                  "src": "112:18:2",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 94,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "112:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "111:20:2"
+            },
+            "returnParameters": {
+              "id": 99,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 98,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 105,
+                  "src": "147:13:2",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 97,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "147:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "146:15:2"
+            },
+            "scope": 114,
+            "src": "93:106:2",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 112,
+              "nodeType": "Block",
+              "src": "262:36:2",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 110,
+                    "name": "careerMemory",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 93,
+                    "src": "279:12:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage",
+                      "typeString": "string storage ref"
+                    }
+                  },
+                  "functionReturnParameters": 109,
+                  "id": 111,
+                  "nodeType": "Return",
+                  "src": "272:19:2"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 113,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getCareer",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 106,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "223:2:2"
+            },
+            "returnParameters": {
+              "id": 109,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 108,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 113,
+                  "src": "247:13:2",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 107,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "247:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "246:15:2"
+            },
+            "scope": 114,
+            "src": "205:93:2",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 115,
+        "src": "34:266:2"
+      }
+    ],
+    "src": "0:300:2"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
+  },
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x05DB568c57FDA1be54bCb8deAF956a4D1cB7396c",
+      "transactionHash": "0x2266ad561dc745be5e9b53742ce90ca9d3e571c57cfaeaf81dbae5e80389a316"
+    }
+  },
+  "schemaVersion": "3.0.1",
+  "updatedAt": "2020-01-08T13:25:46.217Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

@@ -15,14 +15,18 @@ class CreateProjects extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('created_user_id');
+            $table->string('blockchain_id');
+            $table->integer('created_user_id');
             $table->string('project_name');
             $table->string('project_detail');
-            $table->string('project_goal');
+            $table->string('project_goal')->nullable();
             $table->string('before_comment')->nullable();
+            $table->string('addtional_comment')->nullable();
             $table->string('project_result')->nullable();
             $table->date('limit_date')->nullable();
-            $table->string('status');
+            $table->string('tags')->nullable();
+            $table->integer('cheer')->default(0);
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }
